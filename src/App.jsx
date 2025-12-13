@@ -1,8 +1,16 @@
 import React from "react";
+import Navbar from "./components/layout/NavBar";
+import Hero from "./components/sections/Hero";
+
 
 const App = () => {
   return (
-    <div className="h-[1400px] text-7xl text-emerald-400">Welcome to the React Application!</div>
-  );
+    <div className="min-h-screen bg-black">
+    <Navbar />
+    <main>
+      <Hero />
+    </main>
+    </div>
+  )
 }
-export default App;
+export default App
