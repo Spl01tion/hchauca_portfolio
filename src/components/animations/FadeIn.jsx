@@ -1,45 +1,49 @@
-import React from "react";
-import { useEffect,useState,useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-const FadeIn = (children,delay=0, duration=500, threshold=0.1) => {
+const FadeIn = ({ children, delay = 0, duration = 500, threshold = 0.1 }) => {
     const [isVisible, setIsVisible] = useState(false);
     const elementRef = useRef(null);
 
-useEffect(() => {
-    const observer = new IntersectionObserver(
-        (entry) => {
-            //Trigger animation when the element is visible
-            if(entry.isIntersecting && !isVisible){
-                setIsVisible(true);
-        }
-        },{
-            threshold:threshold,
-            rootMargin:'0px 0px -50px 0px' //Trigger slightly before reaching the element
-        });
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                // Trigger animation when the element is visible
+                if (entries[0].isIntersecting && !isVisible) {
+                    setIsVisible(true);
+                }
+            },
+            {
+                threshold: threshold,
+                rootMargin: '0px 0px -50px 0px' // Trigger slightly before reaching the element
+            }
+        );
 
-        if(elementRef.current){
-            observer.observe(elementRef.current);
+        const currentElement = elementRef.current;
+
+        if (currentElement) {
+            observer.observe(currentElement);
         }
 
         return () => {
-            if(elementRef.current){
-                observer.unobserve(elementRef.current);
+            if (currentElement) {
+                observer.unobserve(currentElement);
             }
-        }
-}, [threshold,isVisible]);
+        };
+    }, [threshold, isVisible]);
+
     return (
         <div 
             ref={elementRef}
             className={isVisible ? 'animate-fadeIn' : 'opacity-0'}
             style={{
-                animationDelay:isVisible ? `${delay}ms` : '0ms',
-                animationDuration:`${duration}ms`,
-                animationFillMode:'both'
+                animationDelay: isVisible ? `${delay}ms` : '0ms',
+                animationDuration: `${duration}ms`,
+                animationFillMode: 'both'
             }}
-            >
+        >
             {children}
-
         </div>
     );
 }
+
 export default FadeIn;
