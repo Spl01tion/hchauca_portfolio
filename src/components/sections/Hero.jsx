@@ -50,48 +50,48 @@ const Hero = () => {
                     {/*Right Column - Image */}
                     <FadeIn delay={200}>
                         <div className='relative'>
-                            <div className='relative overflow-hidden rounded-2xl aspect-4/5 max-w-[500px] ml-auto group'>
-                                <div className='absolute inset-0 transform group-hover:scale-105 transition-transform duration-500'>
-                                    <div className=''></div>
+                            <div className='relative overflow-hidden rounded-2xl aspect-2/2 max-w-[500px] ml-auto group'>
+                                <div className='absolute inset-0 rounded-2xl overflow-hidden'>
+                                    <div className='absolute inset-[-2px] bg-linear-to-r from-primary/100 via-primary/40 to primary animate-spin-slow rounded-2xl'></div>
                                 </div>
 
                                 {/* Placeholder for Hero Image */}
-                                <div className=''>
+                                <div className='relative rounded-2xl overflow-hidden m-[1px] h-[calc(100%-2px)]'>
                                     <img
-                                        src="image/logo.png"
+                                        src="image/unnamessd.jpg"
                                         alt="Logo"
-                                        className='w-15 h-15 object-contain'
+                                        className='w-full h-full object-cover'
                                     />
 
                                 </div>
 
                                 {/*Technology Logos*/}
-                                <div className=''>
+                                <div className='absolute bottom-6 left-6 z-20'>
                                     <FadeIn>
-                                        <div className=''>
-                                            <div className=''>
-                                                <SiPhp className='w-8 h-8 text-[#777BB4] inline-block m-2' />
+                                        <div className='flex items-center gap-4 bg-black/40 backdrop-blur-sm border border-white/10 rounded-full px-6 py-3'>
+                                            <div className='w-6 h-6 flex items-center justify-center hover:scale-110 transition-transform duration-300'>
+                                                <SiPhp className='w-full h-full text-[#777BB4]' />
                                             </div>
-                                            <div className=''>
-                                                <SiJavascript className='w-8 h-8 text-[#F7DF1E] inline-block m-2' />
+                                            <div className='w-6 h-6 flex items-center justify-center hover:scale-110 transition-transform duration-300'>
+                                                <SiJavascript className='w-full h-full text-[#F7DF1E] ' />
                                             </div>
-                                            <div className=''>
-                                                <SiMongodb className='w-8 h-8 text-[#47A248] inline-block m-2' />
+                                            <div className='w-6 h-6 flex items-center justify-center hover:scale-110 transition-transform duration-300'>
+                                                <SiMongodb className='w-full h-full text-[#47A248] ' />
                                             </div>
-                                            <div className=''>
-                                                <SiExpress className='w-8 h-8 text-[#000000] inline-block m-2' />
+                                            <div className='w-6 h-6 flex items-center justify-center hover:scale-110 transition-transform duration-300'>
+                                                <SiExpress className='w-full h-full text-[#000000] ' />
                                             </div>
-                                            <div className=''>
-                                                <SiReact className='w-8 h-8 text-[#61DAFB] inline-block m-2' />
+                                            <div className='w-6 h-6 flex items-center justify-center hover:scale-110 transition-transform duration-300'>
+                                                <SiReact className='w-full h-full text-[#61DAFB] ' />
                                             </div>
-                                            <div className=''>
-                                                <SiNodedotjs className='w-8 h-8 text-[#339933] inline-block m-2' />
+                                            <div className='w-6 h-6 flex items-center justify-center hover:scale-110 transition-transform duration-300'>
+                                                <SiNodedotjs className='w-full h-full text-[#339933] ' />
                                             </div>
-                                            <div className=''>
-                                                <SiMysql className='w-8 h-8 text-[#4479A1] inline-block m-2' />
+                                            <div className='w-6 h-6 flex items-center justify-center hover:scale-110 transition-transform duration-300'>
+                                                <SiMysql className='w-full h-full text-[#4479A1] ' />
                                             </div>
-                                            <div className=''>
-                                                <SiTailwindcss className='w-8 h-8 text-[#06B6D4] inline-block m-2' />
+                                            <div className='w-6 h-6 flex items-center justify-center hover:scale-110 transition-transform duration-300'>
+                                                <SiTailwindcss className='w-full h-full text-[#06B6D4] ' />
                                             </div>
 
                                         </div>
@@ -104,6 +104,7 @@ const Hero = () => {
 
                 </div>
             </div>
+            
         </section>
     );
 }
