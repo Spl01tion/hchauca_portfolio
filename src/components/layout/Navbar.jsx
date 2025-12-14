@@ -26,7 +26,7 @@ const Navbar = () => {
     return (
         <nav
             className={`fixed top-0 left-0 right-0 z-50 w-full py-4 transition-all duration-300 ${isScrolled
-                ? 'bg-black/30 backdrop-blur-lg'
+                ? 'bg-white/30 backdrop-blur-lg'
                 : 'bg-transparent'
                 } `}
             style={{ transform: 'translate3d(0,0,0)' }}
@@ -44,10 +44,10 @@ const Navbar = () => {
 
                         <button
                             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                            className='text-2xl font-bold bg-linear-to-r from-primary via-primary/50 to-primary/30 bg-clip-text text-transparent hover:opacity-80 transition-opacity'
+                            className='text-2xl font-bold bg-linear-to-r from-primary via-primary/100 to-primary/40 bg-clip-text text-transparent hover:opacity-100 transition-opacity'
                             aria-label='home'
                         >
-                            Spl01t
+                            {PERSONAL_INFO.nome}
 
                         </button>
                     </div>

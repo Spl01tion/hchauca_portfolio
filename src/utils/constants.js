@@ -1,6 +1,6 @@
 export const PERSONAL_INFO = {
   nome: "Héricles Chaúca",
-  titulo: "Full Stack Developer",
+  titulo: "PHP &  MERN Stack Developer",
   email: "hericles.chauca25@gmail.com",
   local: "Maputo, Mozambique",
   tagline:
