@@ -5,7 +5,7 @@ import Hero from "./components/sections/Hero";
 
 const App = () => {
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-whitte">{/*Set Background color */}
     <Navbar />
     <main>
       <Hero />
