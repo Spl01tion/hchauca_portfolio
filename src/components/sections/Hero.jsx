@@ -104,7 +104,13 @@ const Hero = () => {
 
                 </div>
             </div>
-            
+        {/*Scroll Indicator*/}
+        <button
+            onClick={() => scrollToSection('about')}
+            className='absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce'
+        >
+            <ChevronDown className='w-10 h-10 text-primary hover:text-black transition-colors' />
+        </button>
         </section>
     );
 }
