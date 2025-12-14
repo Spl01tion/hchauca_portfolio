@@ -7,7 +7,7 @@ export const PERSONAL_INFO = {
     "Building modern web solutions with React, Node.js & MongoDB",
   resume: "/resume.pdf",
  bio: [
-    "Final-year Computer Engineering student with a focus on full-stack development and the JavaScript ecosystem.",
+    "Final-year Computer Engineering student with a focus on full-stack development.",
     "Hands-on experience building scalable applications with React.js, Node.js, Express.js, and working with both relational and non-relational databases.",
     "Passionate about technology, problem-solving, and continuously expanding my knowledge in web development and software engineering.",
     "Eager to launch my career and contribute to innovative tech solutions.",
