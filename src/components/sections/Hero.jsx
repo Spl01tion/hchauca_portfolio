@@ -59,7 +59,7 @@ const Hero = () => {
                                 {/* Placeholder for Hero Image */}
                                 <div className='relative rounded-2xl overflow-hidden m-[1px] h-[calc(100%-2px)]'>
                                     <img
-                                        src="image/unnamessd.jpg"
+                                        src="image/Profile.jpg"
                                         alt="Logo"
                                         className='w-full h-full object-cover'
                                     />
