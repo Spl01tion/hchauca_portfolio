@@ -12,7 +12,7 @@ const projects = [
     description: 'Website artístico dedicado à apresentação das obras, biografia e portfólio de um artista musical.',
     image: 'https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop',
     tags: ['Wordpress', 'Elementor'],
-    link: '#'
+    link: 'https://biomusic.infinityfreeapp.com/'
   },
   {
     id: 2,
@@ -37,9 +37,9 @@ const projects = [
     title: 'SJCWork’s Website',
     category: 'Web Apps',
     description: 'Website pessoal de fotógrafo com galeria de fotos, blog, e formulário de contacto. Painel de administração para inserção de postagens e atualização de conteúdo. ',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
+    image: '/image/projects/sss.png',
     tags: ['JavaScript', ' PHP', 'API REST',' BootStrap','phpMyadmin'],
-    link: '#'
+    link: 'https://sjcworks.infinityfreeapp.com/'
   }
 ];
 
