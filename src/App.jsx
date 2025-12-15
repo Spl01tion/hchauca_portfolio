@@ -9,7 +9,7 @@ import Contact from "./components/sections/Contact";
 
 const App = () => {
   return (
-    <div className="min-h-screen bg-whitte pb-[100vh]">{/*Set Background color */}
+    <div className="min-h-screen bg-whitte">{/*Set Background color */}
     <Navbar />
     <main>
       <Hero />

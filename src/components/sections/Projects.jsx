@@ -7,47 +7,38 @@ const categories = ['All', 'Web Apps', 'Desktop', 'Mobile Apps'];
 const projects = [
   {
     id: 1,
-    title: 'E-Commerce Platform',
+    title: 'BioMusic',
     category: 'Web Apps',
-    description: 'Plataforma completa de e-commerce com painel administrativo',
+    description: 'Website artístico dedicado à apresentação das obras, biografia e portfólio de um artista musical.',
     image: 'https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop',
-    tags: ['React', 'Node.js', 'MongoDB'],
+    tags: ['Wordpress', 'Elementor'],
     link: '#'
   },
   {
     id: 2,
-    title: 'Task Manager Desktop',
+    title: 'AtleChat',
     category: 'Desktop',
-    description: 'Aplicativo desktop para gestão de tarefas e produtividade',
+    description: 'Aplicação de chat em Java com comunicação baseada em sockets. Funcionalidade de mensagens em  tempo real entre usuários conectados na mesma rede. ',
     image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=600&fit=crop',
-    tags: ['Electron', 'React', 'SQLite'],
-    link: '#'
+    tags: [' Java', ' JavaSockets  '],
+    link: 'https://github.com/Spl01tion/AtleChat/tree/atlechat_v1/AtleChat'
   },
   {
     id: 3,
-    title: 'Fitness Tracker',
+    title: 'BookStore ISCTEM',
     category: 'Mobile Apps',
-    description: 'App mobile para rastreamento de exercícios e nutrição',
-    image: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&h=600&fit=crop',
-    tags: ['React Native', 'Firebase'],
-    link: '#'
+    description: 'Desenvolvimento de uma aplicação mobile e web para gerenciamento do acesso remoto dos livros da biblioteca do ISCTEM.',
+    image: '/image/projects/Books_page.jpg',
+    tags: ['MongoDB',' ExpressJs','React Native',' NodeJs', 'API REST'],
+    link: 'https://github.com/Spl01tion/bookstore-isctem'
   },
   {
     id: 4,
-    title: 'Dashboard Analytics',
+    title: 'SJCWork’s Website',
     category: 'Web Apps',
-    description: 'Dashboard interativo para análise de dados em tempo real',
+    description: 'Website pessoal de fotógrafo com galeria de fotos, blog, e formulário de contacto. Painel de administração para inserção de postagens e atualização de conteúdo. ',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
-    tags: ['Vue.js', 'D3.js', 'API REST'],
-    link: '#'
-  },
-  {
-    id: 5,
-    title: 'Video Editor Pro',
-    category: 'Desktop',
-    description: 'Editor de vídeo profissional com recursos avançados',
-    image: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&h=600&fit=crop',
-    tags: ['C++', 'Qt', 'FFmpeg'],
+    tags: ['JavaScript', ' PHP', 'API REST',' BootStrap','phpMyadmin'],
     link: '#'
   }
 ];

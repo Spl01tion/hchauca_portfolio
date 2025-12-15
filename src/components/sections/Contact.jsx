@@ -40,13 +40,6 @@ const Contact = () => {
         <section id="contact" className="py-20 bg-white">
             <div className="container mx-auto px-4 text-center max-w-4xl">
 
-                {/* Header */}
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                    Entre em Contato
-                </h2>
-                <p className="text-gray-600 mb-12">
-                    Conecte-se comigo através de qualquer uma das plataformas abaixo.
-                </p>
 
                 {/* Social Icons */}
                 <div className="flex justify-center gap-6 md:gap-10">
@@ -74,10 +67,6 @@ const Contact = () => {
                     })}
                 </div>
 
-                {/* Footer Note */}
-                <p className="mt-10 text-sm text-gray-500">
-                    Geralmente respondo em <span className="font-semibold">24 horas</span>.
-                </p>
             </div>
         </section>
     );
