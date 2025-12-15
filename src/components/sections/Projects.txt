@@ -1,0 +1,188 @@
+import React, { useState, useRed } from 'react';
+import { projects, categories } from '../../data/projects';
+import { Briefcase, Sparkles, Computer, Target, Globe, Palette, TabletSmartphone, ChevronLeft, ChevronRight } from 'lucide-react';
+import ProjectsCard from '../ui/ProjectCard';
+import FadeIn from '../animations/FadeIn';
+
+
+
+
+const Projects = () => {
+
+    const [activeCategory, setActiveCategory] = useState('All');
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const scrollContainerRef = (null);
+
+    const filteredProjects = activeCategory === 'All'
+        ? projects
+        : projects.filter(project => project.category === activeCategory);
+
+    //Reset Carousel when category changes
+    const handleCategoryChange = (category) => {
+        setActiveCategory(category);
+        setCurrentIndex(0);
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+        }
+    };
+
+    const scrollToIndex = (index) => {
+        setCurrentIndex(index);
+        if (scrollContainerRef.current) {
+            const container = scrollContainerRef.current;
+            const cardWidth = container.offsetWidth / 3;
+            container.scrollTo({
+                left: cardWidth * index,
+                behavior: 'smooth'
+
+            });
+
+        };
+    }
+
+    const nextSlide = () => {
+        const maxIndex = Math.max(0, filteredProjects.length - 3);
+        const newIndex = Math.min(currentIndex + 1, maxIndex);
+        scrollToIndex(newIndex);
+
+    };
+
+    const prevSlide = () => {
+        const newIndex = Math.max(currentIndex - 1, 0);
+        scrollToIndex(newIndex);
+    };
+
+    // Category icons mapping
+    const categoryIcons = {
+        'All': Target,
+        'Web Apps': Globe,
+        'Desktop': Computer,
+        'Mobile Apps': TabletSmartphone,
+    };
+    return (
+        <section id="projects" className='relative py-20 bg-white overflow-hidden'>
+            <div className='absolute inset-0 overflow-hidden'>
+                <div className='absolute top-1/3 right-0 w-96 h-96 bg-primary/20 opacity-20 rounded-full blur-3xl'></div>
+                <div className='absolute bottom-1/3 left-0 w-96 h-96 bg-primary/20 opacity-20 rounded-full blur-3xl'></div>
+                <div className=''></div>
+            </div>
+            <div className=''>
+                <FadeIn delay={0}>
+                    <div className=''>
+                        <div className=''>
+                            <Briefcase className=''></Briefcase>
+                            <span className=''>My Work</span>
+                        </div>
+                        <h2 className=''>Featured Projects</h2>
+                        <p className=''>
+                            Showcasing my best work and achievements
+                        </p>
+
+                    </div>
+
+                </FadeIn>
+                {/**Category Filter */}
+                <FadeIn delay={100}>
+                    <div className=''></div>
+                    {categories.map((category) => {
+                        <button
+                            key={category}
+                            onClick={() => handleCategoryChange(category)}
+                            className={`group relative px-6 py-3 rounded-full font-medium transition-all duration-300 ${activeCategory === category
+                                ? 'text-white'
+                                : 'text-white/60 hover:text-white'
+                                }`}
+                        >
+                            <div className={`absolute inset-0 rounded-full transition-all duration-300 ${activeCategory === category
+                                ? 'bg-primary/10 opacity-100'
+                                : 'bg-white/5 border border-white/10 group-hover:bg-white/10'
+                            }`}
+                            >
+
+                            </div>
+                            <div className=''>
+                                {React.createElement(categoryIcons[category],{className:"w-4 h-4"})}
+                                <span className=''>{category}</span>
+                            </div>
+                            {activeCategory === category && (
+                                <div className=''></div>
+                            )}
+
+                        </button>
+                    })}
+
+                </FadeIn>
+
+                {/**Project Carousel */}
+                <FadeIn delay={200}>
+                    <div className=''>
+                        <div 
+                            ref={scrollContainerRef}
+                            className=''
+                        >
+                            <div className=''>
+                                {filteredProjects.map((project,index) =>(
+                                    <div 
+                                        key={project.id}
+                                        className=''
+                                        >
+                                            <ProjectsCard project={project} />
+
+                                        </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/**Navigation Arrows */}
+                        {filteredProjects.length >3 && (
+                            <>
+                            <button
+                                onClick={prevSlide}
+                                disabled ={currentIndex === 0}
+                                className=''
+                                aria-label="Previous projects"
+                            >
+                                <ChevronLeft className='' />
+
+                            </button>
+                            <button
+                                onClick={nextSlide}
+                                disabled ={currentIndex >= filteredProjects.length -3}
+                                className=''
+                                aria-label="Next projects"
+                            >
+                                <ChevronRight className='' />
+
+                            </button>
+                            </>
+                        )}
+                        {/**Navigation dots */}
+                        {filteredProjects.length > 3 && (
+                            <div className=''>
+                                {Array.from({length:Math.max(0,filteredProjects.length - 2)}).map((_,index) =>(
+                                    <button
+                                        key={index}
+                                        onClick={() => scrollToIndex(index)}
+                                        className={`transition-all duration-300 rounded-full ${index === currentIndex
+                                            ? 'bg-primary w-6 h-2'
+                                            : 'bg-white/30 w-2 h-2 hover:bg-white/50'
+                                        }`}
+                                        aria-label={`Go to slide ${index +1}`}
+                                    >
+                                        
+                                    </button>
+                                ))}
+
+                            </div>
+                        )}
+
+                    </div>
+
+                </FadeIn>
+            </div>
+
+        </section>
+    );
+};
+
+export default Projects;
