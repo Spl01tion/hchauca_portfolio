@@ -11,4 +11,4 @@ export const projects = [
         githubUrl: ''
 }];
 
-export const categorias = ['All',"Web Development",'Full Stack',"Mobile Apps"];
+export const categories = ['All',"Web Apps",'Desktop',"Mobile Apps"];
