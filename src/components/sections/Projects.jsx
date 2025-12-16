@@ -10,7 +10,7 @@ const projects = [
     title: 'BioMusic',
     category: 'Web Apps',
     description: 'Website artístico dedicado à apresentação das obras, biografia e portfólio de um artista musical.',
-    image: 'https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop',
+    image: '/image/projects/BioMusic.png',
     tags: ['Wordpress', 'Elementor'],
     link: 'https://biomusic.infinityfreeapp.com/'
   },
