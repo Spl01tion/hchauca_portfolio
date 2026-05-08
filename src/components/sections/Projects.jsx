@@ -1,288 +1,169 @@
-import React, { useState, useRef } from 'react';
-import { Briefcase, Target, Globe, Computer, TabletSmartphone, ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { Briefcase, Globe, Monitor, Smartphone, LayoutGrid, ArrowUpRight } from 'lucide-react';
+import FadeIn from '../animations/FadeIn';
+import RadialGradientBackground from '../backgrounds/RadialGradientBackground';
 
-// Dados de exemplo
 const categories = ['All', 'Web Apps', 'Desktop', 'Mobile Apps'];
 
+const categoryIcons = {
+    'All': LayoutGrid,
+    'Web Apps': Globe,
+    'Desktop': Monitor,
+    'Mobile Apps': Smartphone,
+};
+
 const projects = [
-  {
-    id: 1,
-    title: 'BioMusic',
-    category: 'Web Apps',
-    description: 'Website artístico dedicado à apresentação das obras, biografia e portfólio de um artista musical.',
-    image: '/image/projects/BioMusic.png',
-    tags: ['Wordpress', 'Elementor'],
-    link: 'https://biomusic.infinityfreeapp.com/'
-  },
-  {
-    id: 2,
-    title: 'AtleChat',
-    category: 'Desktop',
-    description: 'Aplicação de chat em Java com comunicação baseada em sockets. Funcionalidade de mensagens em  tempo real entre usuários conectados na mesma rede. ',
-    image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=600&fit=crop',
-    tags: [' Java', ' JavaSockets  '],
-    link: 'https://github.com/Spl01tion/AtleChat/tree/atlechat_v1/AtleChat'
-  },
-  {
-    id: 3,
-    title: 'BookStore ISCTEM',
-    category: 'Mobile Apps',
-    description: 'Desenvolvimento de uma aplicação mobile e web para gerenciamento do acesso remoto dos livros da biblioteca do ISCTEM.',
-    image: '/image/projects/Books_page.jpg',
-    tags: ['MongoDB',' ExpressJs','React Native',' NodeJs', 'API REST'],
-    link: 'https://github.com/Spl01tion/bookstore-isctem'
-  },
-  {
-    id: 4,
-    title: 'SJCWork’s Website',
-    category: 'Web Apps',
-    description: 'Website pessoal de fotógrafo com galeria de fotos, blog, e formulário de contacto. Painel de administração para inserção de postagens e atualização de conteúdo. ',
-    image: '/image/projects/sss.png',
-    tags: ['JavaScript', ' PHP', 'API REST',' BootStrap','phpMyadmin'],
-    link: 'https://sjcworks.infinityfreeapp.com/'
-  }
+    {
+        id: 1,
+        title: 'BioMusic',
+        category: 'Web Apps',
+        description: 'Artistic website presenting the works, biography and portfolio of a musical artist.',
+        image: '/image/projects/BioMusic.png',
+        tags: ['WordPress', 'Elementor'],
+        link: 'https://biomusic.infinityfreeapp.com/',
+    },
+    {
+        id: 2,
+        title: 'AtleChat',
+        category: 'Desktop',
+        description: 'Java chat application with socket-based communication enabling real-time messaging between users on the same network.',
+        image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=600&fit=crop',
+        tags: ['Java', 'Java Sockets'],
+        link: 'https://github.com/Spl01tion/AtleChat/tree/atlechat_v1/AtleChat',
+    },
+    {
+        id: 3,
+        title: 'BookStore ISCTEM',
+        category: 'Mobile Apps',
+        description: 'Mobile and web application for managing remote access to the ISCTEM library book catalogue.',
+        image: '/image/projects/Books_page.jpg',
+        tags: ['MongoDB', 'Express.js', 'React Native', 'Node.js', 'REST API'],
+        link: 'https://github.com/Spl01tion/bookstore-isctem',
+    },
+    {
+        id: 4,
+        title: "SJCWork's Website",
+        category: 'Web Apps',
+        description: 'Photographer personal website with photo gallery, blog and contact form. Admin panel for managing posts and content.',
+        image: '/image/projects/sss.png',
+        tags: ['JavaScript', 'PHP', 'REST API', 'Bootstrap', 'phpMyAdmin'],
+        link: 'https://sjcworks.infinityfreeapp.com/',
+    },
 ];
 
-// Componente ProjectCard
-const ProjectCard = ({ project }) => {
-  return (
-    <div className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-      <div className="relative h-64 overflow-hidden">
-        <img 
-          src={project.image} 
-          alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-      </div>
-      
-      <div className="p-6">
-        <span className="inline-block px-3 py-1 text-xs font-semibold text-blue-600 bg-blue-50 rounded-full mb-3">
-          {project.category}
-        </span>
-        
-        <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-          {project.title}
-        </h3>
-        
-        <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-          {project.description}
-        </p>
-        
-        <div className="flex flex-wrap gap-2 mb-4">
-          {project.tags.map((tag, idx) => (
-            <span 
-              key={idx}
-              className="px-2 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded-md"
-            >
-              {tag}
+const ProjectCard = ({ project }) => (
+    <div className="group flex flex-col bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-primary/30 transition-all duration-300">
+        <div className="relative h-52 overflow-hidden">
+            <img
+                src={project.image}
+                alt={project.title}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-linear-to-t from-black/70 to-transparent" />
+            <span className="absolute top-3 left-3 text-xs bg-black/50 text-white/70 border border-white/20 px-2.5 py-1 rounded-full backdrop-blur-sm">
+                {project.category}
             </span>
-          ))}
         </div>
-        
-        <a 
-          href={project.link}
-          className="inline-flex items-center text-blue-600 font-semibold text-sm hover:text-blue-700 transition-colors"
-        >
-          Ver Projeto
-          <svg className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </a>
-      </div>
-    </div>
-  );
-};
 
-// Componente FadeIn (simplificado)
-const FadeIn = ({ children, delay = 0 }) => {
-  return (
-    <div 
-      className="animate-fadeIn"
-      style={{ animationDelay: `${delay}ms` }}
-    >
-      {children}
+        <div className="flex flex-col gap-3 p-5 flex-1">
+            <h3 className="text-lg font-semibold text-white group-hover:text-primary transition-colors duration-300">
+                {project.title}
+            </h3>
+
+            <p className="text-sm text-white/55 leading-relaxed flex-1">
+                {project.description}
+            </p>
+
+            <div className="flex flex-wrap gap-1.5">
+                {project.tags.map(tag => (
+                    <span key={tag} className="text-xs bg-white/5 text-white/50 px-2 py-1 rounded-md border border-white/10">
+                        {tag}
+                    </span>
+                ))}
+            </div>
+
+            <div className="pt-2 border-t border-white/10">
+                <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-sm text-primary/80 hover:text-primary transition-colors duration-300 font-medium"
+                >
+                    View Project
+                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                </a>
+            </div>
+        </div>
     </div>
-  );
-};
+);
 
 const Projects = () => {
-  const [activeCategory, setActiveCategory] = useState('All');
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const scrollContainerRef = useRef(null);
+    const [activeCategory, setActiveCategory] = useState('All');
 
-  const filteredProjects = activeCategory === 'All'
-    ? projects
-    : projects.filter(project => project.category === activeCategory);
+    const filtered = activeCategory === 'All'
+        ? projects
+        : projects.filter(p => p.category === activeCategory);
 
-  const handleCategoryChange = (category) => {
-    setActiveCategory(category);
-    setCurrentIndex(0);
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollTo({ left: 0, behavior: 'smooth' });
-    }
-  };
+    return (
+        <section id="projects" className="relative py-24 bg-black overflow-hidden text-white">
+            <RadialGradientBackground />
 
-  const scrollToIndex = (index) => {
-    setCurrentIndex(index);
-    if (scrollContainerRef.current) {
-      const container = scrollContainerRef.current;
-      const cardWidth = container.offsetWidth / 3;
-      container.scrollTo({
-        left: cardWidth * index,
-        behavior: 'smooth'
-      });
-    }
-  };
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-  const nextSlide = () => {
-    const maxIndex = Math.max(0, filteredProjects.length - 3);
-    const newIndex = Math.min(currentIndex + 1, maxIndex);
-    scrollToIndex(newIndex);
-  };
+                {/* Header */}
+                <FadeIn delay={60}>
+                    <div className="flex flex-col items-center text-center gap-5 mb-16">
+                        <div className="inline-flex items-center gap-2.5 px-5 py-2.5 border border-primary/30 bg-primary/10 rounded-full">
+                            <Briefcase className="w-4 h-4 text-primary" />
+                            <span className="text-sm text-primary font-medium">My Work</span>
+                        </div>
 
-  const prevSlide = () => {
-    const newIndex = Math.max(currentIndex - 1, 0);
-    scrollToIndex(newIndex);
-  };
+                        <h2 className="text-4xl lg:text-5xl font-normal text-white leading-tight">
+                            Featured Projects
+                        </h2>
 
-  const categoryIcons = {
-    'All': Target,
-    'Web Apps': Globe,
-    'Desktop': Computer,
-    'Mobile Apps': TabletSmartphone,
-  };
+                        <p className="text-base text-white/60 max-w-xl">
+                            A selection of projects I've built across web, desktop and mobile.
+                        </p>
+                    </div>
+                </FadeIn>
 
-  return (
-    <section id="projects" className="relative py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
-      {/* Background decorations */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 right-0 w-96 h-96 bg-blue-400 opacity-10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-purple-400 opacity-10 rounded-full blur-3xl"></div>
-      </div>
+                {/* Category Filter */}
+                <FadeIn delay={120}>
+                    <div className="flex flex-wrap justify-center gap-2 mb-12">
+                        {categories.map(category => {
+                            const Icon = categoryIcons[category];
+                            const isActive = activeCategory === category;
+                            return (
+                                <button
+                                    key={category}
+                                    onClick={() => setActiveCategory(category)}
+                                    className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                                        isActive
+                                            ? 'bg-primary text-white'
+                                            : 'bg-white/5 border border-white/10 text-white/60 hover:border-primary/30 hover:text-white'
+                                    }`}
+                                >
+                                    <Icon className="w-3.5 h-3.5" />
+                                    {category}
+                                </button>
+                            );
+                        })}
+                    </div>
+                </FadeIn>
 
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Header */}
-        <FadeIn delay={0}>
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-full mb-4">
-              <Briefcase className="w-5 h-5" />
-              <span className="font-semibold text-sm">My Work</span>
+                {/* Projects Grid */}
+                <FadeIn delay={200}>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {filtered.map(project => (
+                            <ProjectCard key={project.id} project={project} />
+                        ))}
+                    </div>
+                </FadeIn>
+
             </div>
-            
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Featured Projects
-            </h2>
-            
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Showcasing my best work and achievements
-            </p>
-          </div>
-        </FadeIn>
-
-        {/* Category Filter */}
-        <FadeIn delay={100}>
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {categories.map((category) => {
-              const Icon = categoryIcons[category];
-              return (
-                <button
-                  key={category}
-                  onClick={() => handleCategoryChange(category)}
-                  className={`group relative px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                    activeCategory === category
-                      ? 'text-white'
-                      : 'text-gray-700 hover:text-blue-600'
-                  }`}
-                >
-                  <div
-                    className={`absolute inset-0 rounded-full transition-all duration-300 ${
-                      activeCategory === category
-                        ? 'bg-blue-600 shadow-lg shadow-blue-600/50'
-                        : 'bg-white border border-gray-200 group-hover:border-blue-300 group-hover:shadow-md'
-                    }`}
-                  ></div>
-                  
-                  <div className="relative flex items-center gap-2">
-                    <Icon className="w-4 h-4" />
-                    <span>{category}</span>
-                  </div>
-                  
-                  {activeCategory === category && (
-                    <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1/2 h-1 bg-blue-400 rounded-full"></div>
-                  )}
-                </button>
-              );
-            })}
-          </div>
-        </FadeIn>
-
-        {/* Projects Carousel */}
-        <FadeIn delay={200}>
-          <div className="relative">
-            <div 
-              ref={scrollContainerRef}
-              className="overflow-x-auto scrollbar-hide scroll-smooth"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-            >
-              <div className="flex gap-6 pb-4" style={{ minWidth: 'min-content' }}>
-                {filteredProjects.map((project) => (
-                  <div 
-                    key={project.id}
-                    className="flex-shrink-0 w-full md:w-[calc(33.333%-16px)]"
-                    style={{ minWidth: '300px' }}
-                  >
-                    <ProjectCard project={project} />
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Navigation Arrows */}
-            {filteredProjects.length > 3 && (
-              <>
-                <button
-                  onClick={prevSlide}
-                  disabled={currentIndex === 0}
-                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-blue-50 z-10"
-                  aria-label="Previous projects"
-                >
-                  <ChevronLeft className="w-6 h-6 text-gray-700" />
-                </button>
-                
-                <button
-                  onClick={nextSlide}
-                  disabled={currentIndex >= filteredProjects.length - 3}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-blue-50 z-10"
-                  aria-label="Next projects"
-                >
-                  <ChevronRight className="w-6 h-6 text-gray-700" />
-                </button>
-              </>
-            )}
-
-            {/* Navigation Dots */}
-            {filteredProjects.length > 3 && (
-              <div className="flex justify-center gap-2 mt-8">
-                {Array.from({ length: Math.max(0, filteredProjects.length - 2) }).map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => scrollToIndex(index)}
-                    className={`transition-all duration-300 rounded-full ${
-                      index === currentIndex
-                        ? 'bg-blue-600 w-8 h-2'
-                        : 'bg-gray-300 w-2 h-2 hover:bg-gray-400'
-                    }`}
-                    aria-label={`Go to slide ${index + 1}`}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-        </FadeIn>
-      </div>
-    </section>
-  );
+        </section>
+    );
 };
 
 export default Projects;
