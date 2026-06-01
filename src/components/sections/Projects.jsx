@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Briefcase, Globe, Monitor, Smartphone, LayoutGrid, ArrowUpRight } from 'lucide-react';
 import FadeIn from '../animations/FadeIn';
-import RadialGradientBackground from '../backgrounds/RadialGradientBackground';
 
 const categories = ['All', 'Web Apps', 'Desktop', 'Mobile Apps'];
 
@@ -49,40 +48,58 @@ const projects = [
         tags: ['JavaScript', 'PHP', 'REST API', 'Bootstrap', 'phpMyAdmin'],
         link: 'https://sjcworks.infinityfreeapp.com/',
     },
+    {
+        id: 5,
+        title: 'Play Kids Rainha',
+        category: 'Web Apps',
+        description: 'Institutional website for a children\'s entertainment space (ages 1–12) in Caldas da Rainha. Features services, animated gallery, stats counters and quote request via PHP form.',
+        image: '/image/projects/plk.png',
+        tags: ['HTML5', 'CSS3', 'Bootstrap 5', 'PHP', 'Swiper.js', 'AOS'],
+        link: 'https://playkidsrainha.pt/',
+    },
+    {
+        id: 6,
+        title: 'Power Clean Rainha',
+        category: 'Web Apps',
+        description: 'Institutional site for a professional upholstery and carpet cleaning company. Users select services, fill in details and send quote requests directly via WhatsApp, with images emailed to the business via PHP.',
+        image: '/image/projects/pcr.png',
+        tags: ['HTML5', 'CSS3', 'JavaScript', 'PHP 8', 'AOS', 'Swiper.js'],
+        link: 'https://powercleanrainha.com/',
+    },
 ];
 
 const ProjectCard = ({ project }) => (
-    <div className="group flex flex-col bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-primary/30 transition-all duration-300">
+    <div className="group flex flex-col bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-primary/40 hover:shadow-lg transition-all duration-300 shadow-sm">
         <div className="relative h-52 overflow-hidden">
             <img
                 src={project.image}
                 alt={project.title}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-linear-to-t from-black/70 to-transparent" />
-            <span className="absolute top-3 left-3 text-xs bg-black/50 text-white/70 border border-white/20 px-2.5 py-1 rounded-full backdrop-blur-sm">
+            <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
+            <span className="absolute top-3 left-3 text-xs bg-black/50 text-white/80 border border-white/20 px-2.5 py-1 rounded-full backdrop-blur-sm">
                 {project.category}
             </span>
         </div>
 
         <div className="flex flex-col gap-3 p-5 flex-1">
-            <h3 className="text-lg font-semibold text-white group-hover:text-primary transition-colors duration-300">
+            <h3 className="text-lg font-semibold text-gray-900 group-hover:text-primary transition-colors duration-300">
                 {project.title}
             </h3>
 
-            <p className="text-sm text-white/55 leading-relaxed flex-1">
+            <p className="text-sm text-gray-500 leading-relaxed flex-1">
                 {project.description}
             </p>
 
             <div className="flex flex-wrap gap-1.5">
                 {project.tags.map(tag => (
-                    <span key={tag} className="text-xs bg-white/5 text-white/50 px-2 py-1 rounded-md border border-white/10">
+                    <span key={tag} className="text-xs bg-gray-50 text-gray-500 px-2 py-1 rounded-md border border-gray-200">
                         {tag}
                     </span>
                 ))}
             </div>
 
-            <div className="pt-2 border-t border-white/10">
+            <div className="pt-2 border-t border-gray-100">
                 <a
                     href={project.link}
                     target="_blank"
@@ -105,8 +122,7 @@ const Projects = () => {
         : projects.filter(p => p.category === activeCategory);
 
     return (
-        <section id="projects" className="relative py-24 bg-black overflow-hidden text-white">
-            <RadialGradientBackground />
+        <section id="projects" className="relative py-24 bg-white overflow-hidden">
 
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -118,11 +134,11 @@ const Projects = () => {
                             <span className="text-sm text-primary font-medium">My Work</span>
                         </div>
 
-                        <h2 className="text-4xl lg:text-5xl font-normal text-white leading-tight">
+                        <h2 className="text-4xl lg:text-5xl font-normal text-gray-900 leading-tight">
                             Featured Projects
                         </h2>
 
-                        <p className="text-base text-white/60 max-w-xl">
+                        <p className="text-base text-gray-500 max-w-xl">
                             A selection of projects I've built across web, desktop and mobile.
                         </p>
                     </div>
@@ -140,8 +156,8 @@ const Projects = () => {
                                     onClick={() => setActiveCategory(category)}
                                     className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
                                         isActive
-                                            ? 'bg-primary text-white'
-                                            : 'bg-white/5 border border-white/10 text-white/60 hover:border-primary/30 hover:text-white'
+                                            ? 'bg-primary text-white shadow-sm'
+                                            : 'bg-gray-50 border border-gray-200 text-gray-500 hover:border-primary/30 hover:text-gray-900'
                                     }`}
                                 >
                                     <Icon className="w-3.5 h-3.5" />
