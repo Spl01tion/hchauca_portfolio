@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Briefcase, Globe, Monitor, Smartphone, LayoutGrid, ArrowUpRight } from 'lucide-react';
 import FadeIn from '../animations/FadeIn';
+import { useTranslation } from '../../contexts/LanguageContext';
 
-const categories = ['All', 'Web Apps', 'Desktop', 'Mobile Apps'];
+const CATEGORIES = ['All', 'Web Apps', 'Desktop', 'Mobile Apps'];
 
 const categoryIcons = {
     'All': LayoutGrid,
@@ -16,7 +17,6 @@ const projects = [
         id: 1,
         title: 'BioMusic',
         category: 'Web Apps',
-        description: 'Artistic website presenting the works, biography and portfolio of a musical artist.',
         image: '/image/projects/BioMusic.png',
         tags: ['WordPress', 'Elementor'],
         link: 'https://biomusic.infinityfreeapp.com/',
@@ -25,7 +25,6 @@ const projects = [
         id: 2,
         title: 'AtleChat',
         category: 'Desktop',
-        description: 'Java chat application with socket-based communication enabling real-time messaging between users on the same network.',
         image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=600&fit=crop',
         tags: ['Java', 'Java Sockets'],
         link: 'https://github.com/Spl01tion/AtleChat/tree/atlechat_v1/AtleChat',
@@ -34,7 +33,6 @@ const projects = [
         id: 3,
         title: 'BookStore ISCTEM',
         category: 'Mobile Apps',
-        description: 'Mobile and web application for managing remote access to the ISCTEM library book catalogue.',
         image: '/image/projects/Books_page.jpg',
         tags: ['MongoDB', 'Express.js', 'React Native', 'Node.js', 'REST API'],
         link: 'https://github.com/Spl01tion/bookstore-isctem',
@@ -43,7 +41,6 @@ const projects = [
         id: 4,
         title: "SJCWork's Website",
         category: 'Web Apps',
-        description: 'Photographer personal website with photo gallery, blog and contact form. Admin panel for managing posts and content.',
         image: '/image/projects/sss.png',
         tags: ['JavaScript', 'PHP', 'REST API', 'Bootstrap', 'phpMyAdmin'],
         link: 'https://sjcworks.infinityfreeapp.com/',
@@ -52,7 +49,6 @@ const projects = [
         id: 5,
         title: 'Play Kids Rainha',
         category: 'Web Apps',
-        description: 'Institutional website for a children\'s entertainment space (ages 1–12) in Caldas da Rainha. Features services, animated gallery, stats counters and quote request via PHP form.',
         image: '/image/projects/plk.png',
         tags: ['HTML5', 'CSS3', 'Bootstrap 5', 'PHP', 'Swiper.js', 'AOS'],
         link: 'https://playkidsrainha.pt/',
@@ -61,14 +57,13 @@ const projects = [
         id: 6,
         title: 'Power Clean Rainha',
         category: 'Web Apps',
-        description: 'Institutional site for a professional upholstery and carpet cleaning company. Users select services, fill in details and send quote requests directly via WhatsApp, with images emailed to the business via PHP.',
         image: '/image/projects/pcr.png',
         tags: ['HTML5', 'CSS3', 'JavaScript', 'PHP 8', 'AOS', 'Swiper.js'],
         link: 'https://powercleanrainha.com/',
     },
 ];
 
-const ProjectCard = ({ project }) => (
+const ProjectCard = ({ project, viewLabel, description }) => (
     <div className="group flex flex-col bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-primary/40 hover:shadow-lg transition-all duration-300 shadow-sm">
         <div className="relative h-52 overflow-hidden">
             <img
@@ -88,7 +83,7 @@ const ProjectCard = ({ project }) => (
             </h3>
 
             <p className="text-sm text-gray-500 leading-relaxed flex-1">
-                {project.description}
+                {description}
             </p>
 
             <div className="flex flex-wrap gap-1.5">
@@ -106,7 +101,7 @@ const ProjectCard = ({ project }) => (
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 text-sm text-primary/80 hover:text-primary transition-colors duration-300 font-medium"
                 >
-                    View Project
+                    {viewLabel}
                     <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
                 </a>
             </div>
@@ -116,6 +111,7 @@ const ProjectCard = ({ project }) => (
 
 const Projects = () => {
     const [activeCategory, setActiveCategory] = useState('All');
+    const { t } = useTranslation();
 
     const filtered = activeCategory === 'All'
         ? projects
@@ -123,7 +119,6 @@ const Projects = () => {
 
     return (
         <section id="projects" className="relative py-24 bg-white overflow-hidden">
-
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Header */}
@@ -131,15 +126,15 @@ const Projects = () => {
                     <div className="flex flex-col items-center text-center gap-5 mb-16">
                         <div className="inline-flex items-center gap-2.5 px-5 py-2.5 border border-primary/30 bg-primary/10 rounded-full">
                             <Briefcase className="w-4 h-4 text-primary" />
-                            <span className="text-sm text-primary font-medium">My Work</span>
+                            <span className="text-sm text-primary font-medium">{t.projects.badge}</span>
                         </div>
 
                         <h2 className="text-4xl lg:text-5xl font-normal text-gray-900 leading-tight">
-                            Featured Projects
+                            {t.projects.heading}
                         </h2>
 
                         <p className="text-base text-gray-500 max-w-xl">
-                            A selection of projects I've built across web, desktop and mobile.
+                            {t.projects.description}
                         </p>
                     </div>
                 </FadeIn>
@@ -147,7 +142,7 @@ const Projects = () => {
                 {/* Category Filter */}
                 <FadeIn delay={120}>
                     <div className="flex flex-wrap justify-center gap-2 mb-12">
-                        {categories.map(category => {
+                        {CATEGORIES.map(category => {
                             const Icon = categoryIcons[category];
                             const isActive = activeCategory === category;
                             return (
@@ -161,7 +156,7 @@ const Projects = () => {
                                     }`}
                                 >
                                     <Icon className="w-3.5 h-3.5" />
-                                    {category}
+                                    {t.projects.filter[category]}
                                 </button>
                             );
                         })}
@@ -172,7 +167,12 @@ const Projects = () => {
                 <FadeIn delay={200}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {filtered.map(project => (
-                            <ProjectCard key={project.id} project={project} />
+                            <ProjectCard
+                                key={project.id}
+                                project={project}
+                                description={t.projects.descriptions[project.id]}
+                                viewLabel={t.projects.viewProject}
+                            />
                         ))}
                     </div>
                 </FadeIn>

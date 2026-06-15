@@ -1,6 +1,7 @@
 import React from 'react';
 import { Code2, Server, Database, Smartphone, Wrench, Monitor } from 'lucide-react';
 import FadeIn from '../animations/FadeIn';
+import { useTranslation } from '../../contexts/LanguageContext';
 
 const skillGroups = [
     {
@@ -61,82 +62,90 @@ const levelDot = {
     Learning: 'bg-gray-300',
 };
 
-const Skills = () => (
-    <section id="skills" className="py-24 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+const Skills = () => {
+    const { t } = useTranslation();
 
-            {/* Header */}
-            <FadeIn delay={60}>
-                <div className="flex flex-col items-center text-center gap-5 mb-16">
-                    <div className="inline-flex items-center gap-2.5 px-5 py-2.5 border border-primary/30 bg-primary/10 rounded-full">
-                        <Code2 className="w-4 h-4 text-primary" />
-                        <span className="text-sm text-primary font-medium">Technical Skills</span>
-                    </div>
+    return (
+        <section id="skills" className="py-24 bg-white">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
-                    <h2 className="text-4xl lg:text-5xl font-normal text-gray-900 leading-tight">
-                        My Skill Set
-                    </h2>
-
-                    <p className="text-base text-gray-500 max-w-xl">
-                        Technologies and tools I use to build modern applications.
-                    </p>
-
-                    {/* Legend */}
-                    <div className="flex items-center gap-6 mt-1">
-                        <div className="flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-green-500" />
-                            <span className="text-xs text-gray-400">Advanced</span>
+                {/* Header */}
+                <FadeIn delay={60}>
+                    <div className="flex flex-col items-center text-center gap-5 mb-16">
+                        <div className="inline-flex items-center gap-2.5 px-5 py-2.5 border border-primary/30 bg-primary/10 rounded-full">
+                            <Code2 className="w-4 h-4 text-primary" />
+                            <span className="text-sm text-primary font-medium">{t.skills.badge}</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-primary" />
-                            <span className="text-xs text-gray-400">Intermediate</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-gray-300" />
-                            <span className="text-xs text-gray-400">Learning</span>
-                        </div>
-                    </div>
-                </div>
-            </FadeIn>
 
-            {/* Skill Groups */}
-            <div className="flex flex-col divide-y divide-gray-100">
-                {skillGroups.map((group, i) => {
-                    const Icon = group.icon;
-                    return (
-                        <FadeIn key={group.category} delay={150 + i * 70}>
-                            <div className="py-6 flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-8">
+                        <h2 className="text-4xl lg:text-5xl font-normal text-gray-900 leading-tight">
+                            {t.skills.heading}
+                        </h2>
 
-                                {/* Category label */}
-                                <div className="flex items-center gap-2.5 sm:w-44 shrink-0">
-                                    <div className="w-8 h-8 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center">
-                                        <Icon className="w-4 h-4 text-gray-400" />
-                                    </div>
-                                    <span className="text-sm font-medium text-gray-500">{group.category}</span>
-                                </div>
+                        <p className="text-base text-gray-500 max-w-xl">
+                            {t.skills.description}
+                        </p>
 
-                                {/* Skill pills */}
-                                <div className="flex flex-wrap gap-2">
-                                    {group.skills.map(skill => (
-                                        <div
-                                            key={skill.name}
-                                            className="group flex items-center gap-2 px-4 py-2 bg-gray-50 border border-gray-200 rounded-full hover:border-primary/30 hover:bg-primary/5 transition-all duration-200 cursor-default"
-                                        >
-                                            <span className={`w-1.5 h-1.5 rounded-full ${levelDot[skill.level]} shrink-0`} />
-                                            <span className="text-sm text-gray-700 group-hover:text-gray-900 transition-colors duration-200">{skill.name}</span>
-                                            <span className="text-xs text-gray-400">{skill.years}</span>
-                                        </div>
-                                    ))}
-                                </div>
-
+                        {/* Legend */}
+                        <div className="flex items-center gap-6 mt-1">
+                            <div className="flex items-center gap-2">
+                                <span className="w-2 h-2 rounded-full bg-green-500" />
+                                <span className="text-xs text-gray-400">{t.skills.levels.Advanced}</span>
                             </div>
-                        </FadeIn>
-                    );
-                })}
-            </div>
+                            <div className="flex items-center gap-2">
+                                <span className="w-2 h-2 rounded-full bg-primary" />
+                                <span className="text-xs text-gray-400">{t.skills.levels.Intermediate}</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <span className="w-2 h-2 rounded-full bg-gray-300" />
+                                <span className="text-xs text-gray-400">{t.skills.levels.Learning}</span>
+                            </div>
+                        </div>
+                    </div>
+                </FadeIn>
 
-        </div>
-    </section>
-);
+                {/* Skill Groups */}
+                <div className="flex flex-col divide-y divide-gray-100">
+                    {skillGroups.map((group, i) => {
+                        const Icon = group.icon;
+                        return (
+                            <FadeIn key={group.category} delay={150 + i * 70}>
+                                <div className="py-6 flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-8">
+
+                                    {/* Category label */}
+                                    <div className="flex items-center gap-2.5 sm:w-44 shrink-0">
+                                        <div className="w-8 h-8 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center">
+                                            <Icon className="w-4 h-4 text-gray-400" />
+                                        </div>
+                                        <span className="text-sm font-medium text-gray-500">
+                                            {t.skills.categories[group.category]}
+                                        </span>
+                                    </div>
+
+                                    {/* Skill pills */}
+                                    <div className="flex flex-wrap gap-2">
+                                        {group.skills.map(skill => (
+                                            <div
+                                                key={skill.name}
+                                                className="group flex items-center gap-2 px-4 py-2 bg-gray-50 border border-gray-200 rounded-full hover:border-primary/30 hover:bg-primary/5 transition-all duration-200 cursor-default"
+                                            >
+                                                <span className={`w-1.5 h-1.5 rounded-full ${levelDot[skill.level]} shrink-0`} />
+                                                <span className="text-sm text-gray-700 group-hover:text-gray-900 transition-colors duration-200">
+                                                    {skill.name}
+                                                </span>
+                                                <span className="text-xs text-gray-400">{skill.years}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                </div>
+                            </FadeIn>
+                        );
+                    })}
+                </div>
+
+            </div>
+        </section>
+    );
+};
 
 export default Skills;

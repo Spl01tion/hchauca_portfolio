@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Code, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { NAV_LINKS, PERSONAL_INFO } from '../../utils/constants';
 import { useScrollSpy, scrollToSection } from '../../hooks/useScrollSpy';
+import { useTranslation } from '../../contexts/LanguageContext';
 
 const Navbar = () => {
-
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const activeSection = useScrollSpy(NAV_LINKS.map(link => link.id));
+    const { t, lang, setLang } = useTranslation();
 
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 50);
         };
-
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
@@ -21,34 +21,31 @@ const Navbar = () => {
     const handledNavClick = (sectionId) => {
         scrollToSection(sectionId);
         setIsMenuOpen(false);
-    }
+    };
 
     return (
         <nav
             className={`fixed top-0 left-0 right-0 z-50 w-full py-4 transition-all duration-300 ${isScrolled
                 ? 'bg-white/30 backdrop-blur-lg'
                 : 'bg-transparent'
-                } `}
+                }`}
             style={{ transform: 'translate3d(0,0,0)' }}
         >
             <div className='max-w-[1320px] mx-auto px-5'>
                 <div className='flex items-center justify-between'>
                     {/* Logo */}
                     <div className='flex items-center gap-4'>
-                        {/*<Code className='w-6 h-6 text-primary' />*/}
                         <img
                             src="image/logo.png"
                             alt="Logo"
                             className='w-15 h-15 object-contain'
                         />
-
                         <button
                             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                             className='text-2xl font-bold bg-linear-to-r from-primary via-primary/100 to-primary/40 bg-clip-text text-transparent hover:opacity-100 transition-opacity'
                             aria-label='home'
                         >
                             {PERSONAL_INFO.nome}
-
                         </button>
                     </div>
 
@@ -63,20 +60,39 @@ const Navbar = () => {
                                     : 'text-black/70 hover:text-black'
                                     }`}
                             >
-                                {link.label}
+                                {t.nav[link.id]}
                             </button>
                         ))}
                     </nav>
 
-                    {/*CTA Button */}
-                    <div className='hidden md:flex items-center gap-2'>
+                    {/* Right side: Language toggle + CTA */}
+                    <div className='hidden md:flex items-center gap-4'>
+                        {/* Language Toggle */}
+                        <div className='flex items-center gap-1 text-sm font-medium'>
+                            <button
+                                onClick={() => setLang('en')}
+                                className={`transition-colors duration-200 ${lang === 'en' ? 'text-black' : 'text-black/40 hover:text-black/70'}`}
+                            >
+                                EN
+                            </button>
+                            <span className='text-black/25 select-none'>|</span>
+                            <button
+                                onClick={() => setLang('pt')}
+                                className={`transition-colors duration-200 ${lang === 'pt' ? 'text-black' : 'text-black/40 hover:text-black/70'}`}
+                            >
+                                PT
+                            </button>
+                        </div>
+
+                        {/* CTA Button */}
                         <button
                             onClick={() => handledNavClick('contact')}
                             className='px-7 py-3.5 bg-black text-white rounded-[125px] border border-primary hover:bg-primary/90 font-medium text-base hover:opacity-90 transition-all duration-300'
                         >
-                            Let's Work Together
+                            {t.nav.cta}
                         </button>
                     </div>
+
                     {/* Mobile Menu Button */}
                     <button
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -85,10 +101,10 @@ const Navbar = () => {
                         aria-expanded={isMenuOpen}
                     >
                         {isMenuOpen ? <X className='w-6 h-6' /> : <Menu className='w-6 h-6' />}
-
                     </button>
                 </div>
             </div>
+
             {/* Mobile Menu */}
             <div
                 className={`md:hidden transition-all duration-300 overflow-hidden ${isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
@@ -102,19 +118,40 @@ const Navbar = () => {
                                 ? 'bg-black/10 text-black'
                                 : 'text-black/70 hover:bg-black/5 hover:text-black'}`}
                         >
-                            {link.label}
+                            {t.nav[link.id]}
                         </button>
                     ))}
+
+                    {/* Mobile Language Toggle */}
+                    <div className='flex items-center gap-3 px-4 py-2'>
+                        <span className='text-xs text-black/40 uppercase tracking-wider'>Language</span>
+                        <div className='flex items-center gap-1 text-sm font-medium'>
+                            <button
+                                onClick={() => setLang('en')}
+                                className={`transition-colors duration-200 ${lang === 'en' ? 'text-black font-semibold' : 'text-black/40'}`}
+                            >
+                                EN
+                            </button>
+                            <span className='text-black/25 select-none'>|</span>
+                            <button
+                                onClick={() => setLang('pt')}
+                                className={`transition-colors duration-200 ${lang === 'pt' ? 'text-black font-semibold' : 'text-black/40'}`}
+                            >
+                                PT
+                            </button>
+                        </div>
+                    </div>
+
                     <button
                         onClick={() => handledNavClick('contact')}
                         className='w-full px-7 py-3.5 bg-black text-white font-medium text-base rounded-[125px] border border-primary hover:bg-primary/90 hover:opacity-90 transition-all duration-300 mt-2'
                     >
-                        Let's Work Together
+                        {t.nav.cta}
                     </button>
                 </div>
             </div>
         </nav>
-    )
-}
+    );
+};
 
-export default Navbar
+export default Navbar;
