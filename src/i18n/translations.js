@@ -23,6 +23,7 @@ export const translations = {
         'Passionate about technology, problem-solving, and continuously expanding my knowledge in web development and software engineering.',
         'Eager to launch my career and contribute to innovative tech solutions.',
       ],
+      resume: '/resume_EN.pdf',
       downloadCV: 'Download CV',
       educationLabel: 'Education',
       education: [
@@ -121,6 +122,7 @@ export const translations = {
         'Apaixonado por tecnologia, resolução de problemas e em contínua expansão do meu conhecimento em desenvolvimento web e engenharia de software.',
         'Ansioso para lançar a minha carreira e contribuir para soluções tecnológicas inovadoras.',
       ],
+      resume: '/CV_PT.pdf',
       downloadCV: 'Baixar CV',
       educationLabel: 'Formação',
       education: [
