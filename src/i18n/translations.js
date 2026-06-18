@@ -80,6 +80,8 @@ export const translations = {
         4: 'Photographer personal website with photo gallery, blog and contact form. Admin panel for managing posts and content.',
         5: "Institutional website for a children's entertainment space (ages 1–12) in Caldas da Rainha. Features services, animated gallery, stats counters and quote request via PHP form.",
         6: 'Institutional site for a professional upholstery and carpet cleaning company. Users select services, fill in details and send quote requests directly via WhatsApp, with images emailed to the business via PHP.',
+        7: 'Institutional website for a law firm. Presents the firm, practice areas, resolved cases, and a contact form for scheduling consultations. Built as a Single Page Application.',
+        8: 'PHP blog/CMS web application following a simplified MVC pattern with a front controller and custom routing. Allows publishing articles organized by categories, with search, pagination, and an admin area to manage content and users.',
       },
     },
     contact: {
@@ -176,6 +178,8 @@ export const translations = {
         4: 'Website pessoal de fotógrafo com galeria de fotos, blog e formulário de contato. Painel admin para gestão de posts e conteúdo.',
         5: 'Website institucional para um espaço de entretenimento infantil (1–12 anos) em Caldas da Rainha. Inclui serviços, galeria animada, contadores de estatísticas e pedido de orçamento via formulário PHP.',
         6: 'Site institucional para uma empresa de limpeza profissional de estofos e tapetes. Os utilizadores selecionam serviços, preenchem detalhes e enviam pedidos de orçamento diretamente via WhatsApp, com imagens enviadas ao negócio por email via PHP.',
+        7: 'Website institucional de um escritório de advocacia. Apresenta o escritório, as áreas de atuação, casos resolvidos e um formulário de contacto para agendamento de consultas. Desenvolvido como uma Single Page Application.',
+        8: 'Aplicação web de blog/CMS em PHP que segue um padrão MVC simplificado com front controller e roteamento próprio. Permite publicar artigos organizados por categorias, com pesquisa, paginação e uma área de administração para gerir conteúdos e utilizadores.',
       },
     },
     contact: {

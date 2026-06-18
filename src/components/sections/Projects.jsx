@@ -61,6 +61,22 @@ const projects = [
         tags: ['HTML5', 'CSS3', 'JavaScript', 'PHP 8', 'AOS', 'Swiper.js'],
         link: 'https://powercleanrainha.com/',
     },
+    {
+        id: 7,
+        title: 'Lawyer Portfolio',
+        category: 'Web Apps',
+        image: '/image/projects/lawyerportfolio.png',
+        tags: ['HTML5', 'CSS3', 'JavaScript', 'SPA'],
+        link: 'https://lawyerportfolio.infinityfree.me',
+    },
+    {
+        id: 8,
+        title: 'SJCMídia Blog',
+        category: 'Web Apps',
+        image: '/image/projects/sjcmidia_blog.png',
+        tags: ['PHP', 'MySQL', 'HTML', 'CSS', 'Bootstrap'],
+        link: 'https://sjcmidia.infinityfreeapp.com/',
+    },
 ];
 
 const ProjectCard = ({ project, viewLabel, description }) => (
@@ -94,17 +110,19 @@ const ProjectCard = ({ project, viewLabel, description }) => (
                 ))}
             </div>
 
-            <div className="pt-2 border-t border-gray-100">
-                <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-sm text-primary/80 hover:text-primary transition-colors duration-300 font-medium"
-                >
-                    {viewLabel}
-                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
-                </a>
-            </div>
+            {project.link && (
+                <div className="pt-2 border-t border-gray-100">
+                    <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sm text-primary/80 hover:text-primary transition-colors duration-300 font-medium"
+                    >
+                        {viewLabel}
+                        <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                    </a>
+                </div>
+            )}
         </div>
     </div>
 );
