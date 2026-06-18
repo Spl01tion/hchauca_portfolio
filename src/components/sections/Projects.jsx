@@ -77,6 +77,14 @@ const projects = [
         tags: ['PHP', 'MySQL', 'HTML', 'CSS', 'Bootstrap'],
         link: 'https://sjcmidia.infinityfreeapp.com/',
     },
+    {
+        id: 9,
+        title: 'GoodDevs - IT Services',
+        category: 'Web Apps',
+        image: '/image/projects/gooddevs.png',
+        tags: ['HTML', 'CSS', 'JavaScript', 'GSAP', 'ScrollTrigger'],
+        link: null,
+    },
 ];
 
 const ProjectCard = ({ project, viewLabel, description }) => (
