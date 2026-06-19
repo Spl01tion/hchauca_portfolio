@@ -84,6 +84,7 @@ export const translations = {
         7: 'Institutional website for a law firm. Presents the firm, practice areas, resolved cases, and a contact form for scheduling consultations. Built as a Single Page Application.',
         8: 'PHP blog/CMS web application following a simplified MVC pattern with a front controller and custom routing. Allows publishing articles organized by categories, with search, pagination, and an admin area to manage content and users.',
         9: 'Institutional website for GoodDevs - IT Services, EI, a technology company based in Maputo (Matola), Mozambique. Slogan: "Your digital world, programmed by us." Built with pure HTML/CSS/JS and animated with GSAP + ScrollTrigger.',
+        10: 'Parking lot management system for the Municipality of Machaquene. Controls vehicle entry and exit, manages available spaces and payments, and generates accounting reports on revenue and usage.',
       },
     },
     contact: {
@@ -184,6 +185,7 @@ export const translations = {
         7: 'Website institucional de um escritório de advocacia. Apresenta o escritório, as áreas de atuação, casos resolvidos e um formulário de contacto para agendamento de consultas. Desenvolvido como uma Single Page Application.',
         8: 'Aplicação web de blog/CMS em PHP que segue um padrão MVC simplificado com front controller e roteamento próprio. Permite publicar artigos organizados por categorias, com pesquisa, paginação e uma área de administração para gerir conteúdos e utilizadores.',
         9: 'Website institucional para a GoodDevs - IT Services, EI, uma empresa de tecnologia sediada em Maputo (Matola), Moçambique. Slogan: "Seu mundo digital, programado por nós." Desenvolvido com HTML/CSS/JS puro e animado com GSAP + ScrollTrigger.',
+        10: 'Sistema informático de gestão do parque de estacionamento de viaturas do Município de Machaquene. Controla a entrada e saída de viaturas, gere os lugares disponíveis e os pagamentos, e produz relatórios contabilísticos de receitas e utilização.',
       },
     },
     contact: {

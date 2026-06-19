@@ -85,7 +85,61 @@ const projects = [
         tags: ['HTML', 'CSS', 'JavaScript', 'GSAP', 'ScrollTrigger'],
         link: null,
     },
+    {
+        id: 10,
+        title: 'MaxaPark',
+        category: 'Web Apps',
+        images: [
+            '/image/projects/maxapark_home.png',
+            '/image/projects/maxapark_admin.png',
+        ],
+        tags: ['PHP 8.2', 'MySQL', 'Bootstrap 5', 'JavaScript'],
+        link: 'https://github.com/Spl01tion/MaxaPark.git',
+    },
 ];
+
+const getThumb = (p) => p.images?.[0] ?? p.image;
+
+const ProjectImageSlider = ({ project }) => {
+    const images = project.images ?? [project.image];
+    const [imgIndex, setImgIndex] = useState(0);
+
+    useEffect(() => {
+        setImgIndex(0);
+        if (images.length <= 1) return;
+        const timer = setInterval(() => {
+            setImgIndex(i => (i + 1) % images.length);
+        }, 5000);
+        return () => clearInterval(timer);
+    }, [project.id]);
+
+    return (
+        <div className="relative h-64 md:h-auto overflow-hidden">
+            {images.map((src, i) => (
+                <img
+                    key={src}
+                    src={src}
+                    alt={`${project.title} ${i + 1}`}
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${i === imgIndex ? 'opacity-100' : 'opacity-0'}`}
+                />
+            ))}
+            <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/10 to-transparent" />
+            <span className="absolute top-4 left-4 text-xs bg-black/50 text-white/80 border border-white/20 px-3 py-1 rounded-full backdrop-blur-sm">
+                {project.category}
+            </span>
+            {images.length > 1 && (
+                <div className="absolute bottom-4 right-4 flex gap-1.5">
+                    {images.map((_, i) => (
+                        <span
+                            key={i}
+                            className={`block h-1 rounded-full transition-all duration-500 ${i === imgIndex ? 'w-5 bg-white' : 'w-1.5 bg-white/40'}`}
+                        />
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+};
 
 const Projects = () => {
     const [activeCategory, setActiveCategory] = useState('All');
@@ -170,18 +224,7 @@ const Projects = () => {
                         className={`grid grid-cols-1 md:grid-cols-2 rounded-2xl overflow-hidden border border-gray-200 shadow-sm transition-opacity duration-180 ${fading ? 'opacity-0' : 'opacity-100'}`}
                         style={{ minHeight: '400px' }}
                     >
-                        {/* Image side */}
-                        <div className="relative h-64 md:h-auto overflow-hidden">
-                            <img
-                                src={project.image}
-                                alt={project.title}
-                                className="w-full h-full object-cover"
-                            />
-                            <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/10 to-transparent" />
-                            <span className="absolute top-4 left-4 text-xs bg-black/50 text-white/80 border border-white/20 px-3 py-1 rounded-full backdrop-blur-sm">
-                                {project.category}
-                            </span>
-                        </div>
+                        <ProjectImageSlider project={project} />
 
                         {/* Details side */}
                         <div className="p-8 flex flex-col gap-5 bg-white">
@@ -225,7 +268,6 @@ const Projects = () => {
 
                     {/* Navigation */}
                     <div className="flex items-center justify-between mt-6 px-1">
-
                         <button
                             onClick={prev}
                             disabled={filtered.length <= 1}
@@ -259,7 +301,6 @@ const Projects = () => {
                         >
                             <ChevronRight className="w-5 h-5" />
                         </button>
-
                     </div>
 
                     {/* Thumbnail strip */}
@@ -276,7 +317,7 @@ const Projects = () => {
                                 aria-label={p.title}
                             >
                                 <img
-                                    src={p.image}
+                                    src={getThumb(p)}
                                     alt={p.title}
                                     className="w-full h-full object-cover"
                                 />
