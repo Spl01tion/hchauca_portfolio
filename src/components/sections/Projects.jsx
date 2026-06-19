@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Briefcase, Globe, Monitor, Smartphone, LayoutGrid, ArrowUpRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Briefcase, Globe, Monitor, Smartphone, LayoutGrid, ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import FadeIn from '../animations/FadeIn';
 import { useTranslation } from '../../contexts/LanguageContext';
 
@@ -87,65 +87,40 @@ const projects = [
     },
 ];
 
-const ProjectCard = ({ project, viewLabel, description }) => (
-    <div className="group flex flex-col bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-primary/40 hover:shadow-lg transition-all duration-300 shadow-sm">
-        <div className="relative h-52 overflow-hidden">
-            <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
-            <span className="absolute top-3 left-3 text-xs bg-black/50 text-white/80 border border-white/20 px-2.5 py-1 rounded-full backdrop-blur-sm">
-                {project.category}
-            </span>
-        </div>
-
-        <div className="flex flex-col gap-3 p-5 flex-1">
-            <h3 className="text-lg font-semibold text-gray-900 group-hover:text-primary transition-colors duration-300">
-                {project.title}
-            </h3>
-
-            <p className="text-sm text-gray-500 leading-relaxed flex-1">
-                {description}
-            </p>
-
-            <div className="flex flex-wrap gap-1.5">
-                {project.tags.map(tag => (
-                    <span key={tag} className="text-xs bg-gray-50 text-gray-500 px-2 py-1 rounded-md border border-gray-200">
-                        {tag}
-                    </span>
-                ))}
-            </div>
-
-            {project.link && (
-                <div className="pt-2 border-t border-gray-100">
-                    <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-sm text-primary/80 hover:text-primary transition-colors duration-300 font-medium"
-                    >
-                        {viewLabel}
-                        <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
-                    </a>
-                </div>
-            )}
-        </div>
-    </div>
-);
-
 const Projects = () => {
     const [activeCategory, setActiveCategory] = useState('All');
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [fading, setFading] = useState(false);
     const { t } = useTranslation();
 
     const filtered = activeCategory === 'All'
         ? projects
         : projects.filter(p => p.category === activeCategory);
 
+    const safeIndex = Math.min(currentIndex, Math.max(0, filtered.length - 1));
+    const project = filtered[safeIndex];
+
+    useEffect(() => {
+        setCurrentIndex(0);
+    }, [activeCategory]);
+
+    const navigate = (newIndex) => {
+        if (fading || filtered.length <= 1) return;
+        setFading(true);
+        setTimeout(() => {
+            setCurrentIndex(newIndex);
+            setFading(false);
+        }, 180);
+    };
+
+    const prev = () => navigate((safeIndex - 1 + filtered.length) % filtered.length);
+    const next = () => navigate((safeIndex + 1) % filtered.length);
+
+    if (!project) return null;
+
     return (
         <section id="projects" className="relative py-24 bg-white overflow-hidden">
-            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Header */}
                 <FadeIn delay={60}>
@@ -154,11 +129,9 @@ const Projects = () => {
                             <Briefcase className="w-4 h-4 text-primary" />
                             <span className="text-sm text-primary font-medium">{t.projects.badge}</span>
                         </div>
-
                         <h2 className="text-4xl lg:text-5xl font-normal text-gray-900 leading-tight">
                             {t.projects.heading}
                         </h2>
-
                         <p className="text-base text-gray-500 max-w-xl">
                             {t.projects.description}
                         </p>
@@ -189,20 +162,129 @@ const Projects = () => {
                     </div>
                 </FadeIn>
 
-                {/* Projects Grid */}
+                {/* Carousel */}
                 <FadeIn delay={200}>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {filtered.map(project => (
-                            <ProjectCard
-                                key={project.id}
-                                project={project}
-                                description={t.projects.descriptions[project.id]}
-                                viewLabel={t.projects.viewProject}
+
+                    {/* Main Card */}
+                    <div
+                        className={`grid grid-cols-1 md:grid-cols-2 rounded-2xl overflow-hidden border border-gray-200 shadow-sm transition-opacity duration-180 ${fading ? 'opacity-0' : 'opacity-100'}`}
+                        style={{ minHeight: '400px' }}
+                    >
+                        {/* Image side */}
+                        <div className="relative h-64 md:h-auto overflow-hidden">
+                            <img
+                                src={project.image}
+                                alt={project.title}
+                                className="w-full h-full object-cover"
                             />
+                            <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/10 to-transparent" />
+                            <span className="absolute top-4 left-4 text-xs bg-black/50 text-white/80 border border-white/20 px-3 py-1 rounded-full backdrop-blur-sm">
+                                {project.category}
+                            </span>
+                        </div>
+
+                        {/* Details side */}
+                        <div className="p-8 flex flex-col gap-5 bg-white">
+                            <div className="flex items-start justify-between gap-4">
+                                <h3 className="text-2xl font-semibold text-gray-900 leading-tight">
+                                    {project.title}
+                                </h3>
+                                <span className="text-xs text-gray-300 font-mono shrink-0 mt-1 select-none">
+                                    {String(safeIndex + 1).padStart(2, '0')}&nbsp;/&nbsp;{String(filtered.length).padStart(2, '0')}
+                                </span>
+                            </div>
+
+                            <p className="text-sm text-gray-500 leading-relaxed flex-1">
+                                {t.projects.descriptions[project.id]}
+                            </p>
+
+                            <div className="flex flex-wrap gap-2">
+                                {project.tags.map(tag => (
+                                    <span
+                                        key={tag}
+                                        className="text-xs bg-gray-50 text-gray-500 px-3 py-1 rounded-full border border-gray-200"
+                                    >
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
+
+                            {project.link && (
+                                <a
+                                    href={project.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-1.5 text-sm font-medium text-primary/80 hover:text-primary transition-all duration-300 group w-fit pt-1 border-t border-gray-100"
+                                >
+                                    {t.projects.viewProject}
+                                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                                </a>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Navigation */}
+                    <div className="flex items-center justify-between mt-6 px-1">
+
+                        <button
+                            onClick={prev}
+                            disabled={filtered.length <= 1}
+                            className="w-10 h-10 rounded-full border border-gray-200 bg-white flex items-center justify-center text-gray-400 hover:border-primary/40 hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300"
+                            aria-label="Previous project"
+                        >
+                            <ChevronLeft className="w-5 h-5" />
+                        </button>
+
+                        {/* Dot indicators */}
+                        <div className="flex items-center gap-1.5">
+                            {filtered.map((_, i) => (
+                                <button
+                                    key={i}
+                                    onClick={() => navigate(i)}
+                                    aria-label={`Project ${i + 1}`}
+                                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                                        i === safeIndex
+                                            ? 'w-6 bg-primary'
+                                            : 'w-1.5 bg-gray-300 hover:bg-gray-400'
+                                    }`}
+                                />
+                            ))}
+                        </div>
+
+                        <button
+                            onClick={next}
+                            disabled={filtered.length <= 1}
+                            className="w-10 h-10 rounded-full border border-gray-200 bg-white flex items-center justify-center text-gray-400 hover:border-primary/40 hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300"
+                            aria-label="Next project"
+                        >
+                            <ChevronRight className="w-5 h-5" />
+                        </button>
+
+                    </div>
+
+                    {/* Thumbnail strip */}
+                    <div className="flex gap-2 mt-4 overflow-x-auto pb-1 scrollbar-hide">
+                        {filtered.map((p, i) => (
+                            <button
+                                key={p.id}
+                                onClick={() => navigate(i)}
+                                className={`shrink-0 w-16 h-10 rounded-lg overflow-hidden border-2 transition-all duration-300 ${
+                                    i === safeIndex
+                                        ? 'border-primary opacity-100'
+                                        : 'border-transparent opacity-40 hover:opacity-70'
+                                }`}
+                                aria-label={p.title}
+                            >
+                                <img
+                                    src={p.image}
+                                    alt={p.title}
+                                    className="w-full h-full object-cover"
+                                />
+                            </button>
                         ))}
                     </div>
-                </FadeIn>
 
+                </FadeIn>
             </div>
         </section>
     );
