@@ -83,7 +83,7 @@ const projects = [
         category: 'Web Apps',
         image: '/image/projects/gooddevs.png',
         tags: ['HTML', 'CSS', 'JavaScript', 'GSAP', 'ScrollTrigger'],
-        link: null,
+        link: 'https://gooddevs.rf.gd',
     },
     {
         id: 10,
@@ -95,6 +95,14 @@ const projects = [
         ],
         tags: ['PHP 8.2', 'MySQL', 'Bootstrap 5', 'JavaScript'],
         link: 'https://github.com/Spl01tion/MaxaPark.git',
+    },
+    {
+        id: 11,
+        title: 'Comprar Códigos Moçambique',
+        category: 'Web Apps',
+        image: '/image/projects/comprarcodigos.png',
+        tags: ['WordPress', 'WooCommerce', 'PHP', 'jQuery', 'WP Rocket'],
+        link: 'https://comprarcodigos.co.mz/',
     },
 ];
 
